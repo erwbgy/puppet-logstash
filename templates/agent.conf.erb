@@ -1,0 +1,26 @@
+input {                                                                 
+  tcp {                                                                 
+    format => "json_event"                                              
+    host => "<%= @fqdn %>"
+    port => 5544                                                        
+    type => "awesant"                                                   
+  }                                                                     
+}                                                                       
+filter {                                                                
+  grok {                                                                
+    match => [ "@timestamp", "^%{DATE_EU:date}" ]                       
+    type => "awesant"                                                   
+  }                                                                     
+}
+output {
+  file {
+    tags => 'syslog-messages'
+    message_format => "%{@message}"
+    path => "/var/log/logstash/syslog/messages-%{date}.log"
+  }
+  file {
+    tags => 'syslog-secure'
+    message_format => "%{@message}"
+    path => "/var/log/logstash/syslog/secure-%{date}.log"
+  }
+}

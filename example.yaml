@@ -1,16 +1,1 @@
-logstash::user:     'logstash'
-logstash::group:    'logstash'
-logstash::basedir:  '/apps/logstash1'
-
-logstash::java_home: '/usr/java/jdk1.7.0_07'
-logstash::min_mem:   '-Xms256m'
-logstash::max_mem:   '-Xmx256m'
-logstash::java_opts: '-XX:MaxPermSize=512m'
-
-logstash::jar_file:     'logstash-1.1.9-monolithic.jar'
-logstash::logdir:       '/apps/logstash1/logs'
-logstash::bind_address: "%{ipaddress_eth0_1}"
-
-logstash::config_template:
-  mode:     '0440'
-  template: '/var/lib/puppet/files/logstash/logstash.conf.erb'
+logstash::config_template: '/etc/puppet/templates/logstash/agent.conf.erb'

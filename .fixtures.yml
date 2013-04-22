@@ -1,0 +1,3 @@
+fixtures:
+  symlinks:
+    logstash: "#{source_dir}"
