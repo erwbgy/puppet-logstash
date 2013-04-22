@@ -19,8 +19,9 @@ Alternatively you call it as a parameterised class:
 ## Installation
 
 Installation assumes that an 'logstash' package is available from the package
-repository.  See http://download.bloonix.de/ for pre-built packages for
-RedHat-like and Debian-like hosts.
+repository and that the agent configuration file is /etc/logstash/agent.conf.
+See http://download.bloonix.de/ for pre-built packages for RedHat-like and
+Debian-like hosts.
 
 ## Configuration
 
