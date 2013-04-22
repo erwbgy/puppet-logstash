@@ -1,0 +1,62 @@
+Create defined types for all the supported input and output types
+
+Have logstash::input::fragment, logstash::filter::fragment and
+logstash::output::fragment types that can be used to configure logstash config
+not currently supported by the module.
+
+Have logstash::input::header for generic text to go before generated types
+Have logstash::input::footer for generic text to go after generated types
+
+For input types export a logstash::connector resource that can be 'imported' by
+modules that need to connect to this input - for example:
+
+1)  Logstash:
+
+    # export TCP connector
+    @@logstash::awesant_tcp_connector { 'logstash-prod-tcp':
+      host   => '10.7.16.38',
+      port   => 5544,
+      type   => 'awesant',
+    }
+
+    On awesant:
+
+    Logstash::Awesant_tcp_connector <<| name = 'logstash-prod-tcp' |>>
+
+    generates:
+
+    socket {
+        host 10.7.16.38
+        port 5544
+        type awesant
+    }
+
+2)  Logstash:
+
+    # export Redis connector
+    @@logstash::awesant_redis_connector { 'logstash-prod-redis':
+      host     => '127.0.0.1',
+      port     => 6379,
+      type     => 'awesant',
+      key      => 'awesant',
+      database => 0,
+      timeout  => 10,
+      password => 'foobared'
+    }
+
+    On awesant:
+
+    Logstash::Awesant_redis_connector <<| name = 'logstash-prod-redis' |>>
+
+    generates:
+
+    redis {
+        type syslog
+        key syslog
+        host 127.0.0.1
+        port 6379
+        database 0
+        timeout 10
+        password foobared
+    }
+
