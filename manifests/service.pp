@@ -1,6 +1,6 @@
 class logstash::service {
-  service { 'logstash':
-    ensure  => 'running',
-    enabled => true,
+  service { 'logstash-agent':
+    ensure => 'running',
+    enable => true,
   }
 }
